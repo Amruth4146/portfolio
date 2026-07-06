@@ -259,8 +259,15 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .home__social-link:hover { border-color: var(--first-color); color: var(--first-color); transform: translateY(-3px); }
 
-/* Home image / avatar */
-.home__image { display: flex; justify-content: center; align-items: center; position: relative; }
+.home__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin-inline: auto;
+}
 .home__blob {
   width: 220px; height: 220px;
   background: var(--gradient-color);
@@ -272,6 +279,8 @@ img { display: block; max-width: 100%; height: auto; }
   z-index: 1;
   overflow: hidden;
   padding: 4px;
+  position: relative;
+  flex-shrink: 0;
 }
 .home__profile-img {
   width: 100%;
@@ -282,11 +291,19 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .home__circle-text {
   position: absolute;
+  top: 0; left: 0;
   width: 300px; height: 300px;
-  animation: spin 12s linear infinite;
+  animation: spin 10s linear infinite;
+  pointer-events: none;
 }
 .home__circle-svg { width: 100%; height: 100%; }
-.home__circle-words { font-size: 11px; fill: var(--text-color); letter-spacing: 4px; font-family: var(--second-font); }
+.home__circle-words {
+  font-size: 12px;
+  fill: var(--text-color);
+  letter-spacing: 5px;
+  font-family: var(--second-font);
+  font-weight: 600;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
 
 .home__blob-1 { top: 20%; left: 5%; }
@@ -604,6 +621,24 @@ img { display: block; max-width: 100%; height: auto; }
 .scrollup.show-scroll { bottom: 3rem; }
 
 /*=============== BREAKPOINTS ===============*/
+
+/* Mobile projects fix — force full width single column */
+@media (width < 540px) {
+  .container { margin-inline: 1rem; }
+  .work__container { width: 100%; }
+  .work__grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  .work__card {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+  }
+  .work__filters { gap: .6rem; }
+  .work__filter { padding: .4rem 1rem; font-size: var(--smaller-font-size); }
+}
+
 @media (width >= 540px) {
   .nav__menu { width: 50%; }
   .work__grid { grid-template-columns: repeat(2, 1fr); }
@@ -632,6 +667,7 @@ img { display: block; max-width: 100%; height: auto; }
   .nav__menu { width: initial; }
   .nav__list { flex-direction: row; align-items: center; column-gap: 3rem; }
   .home__blob { width: 300px; height: 300px; }
+  .home__image { width: 420px; height: 420px; }
   .home__circle-text { width: 420px; height: 420px; }
   .work__grid { grid-template-columns: repeat(3, 1fr); }
   .skills__container { grid-template-columns: repeat(3, 1fr); }
@@ -640,5 +676,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 @media (width >= 1400px) {
-  .home__blob { width: 340px; height: 340px; font-size: 6rem; }
+  .home__blob { width: 340px; height: 340px; }
+  .home__image { width: 460px; height: 460px; }
+  .home__circle-text { width: 460px; height: 460px; }
 }
