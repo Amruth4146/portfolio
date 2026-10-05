@@ -151,14 +151,33 @@ const cursorBig   = document.querySelector('.cursor__ball--big');
 const cursorSmall = document.querySelector('.cursor__ball--small');
 
 if (cursorBig && cursorSmall && window.matchMedia('(pointer: fine)').matches) {
+  let mouseX = -100, mouseY = -100;
+  let isHovered = false;
+
+  const updateCursor = () => {
+    const scale = isHovered ? ' scale(1.5)' : ' scale(1)';
+    cursorBig.style.transform   = `translate(${mouseX - 20}px, ${mouseY - 20}px)${scale}`;
+    cursorSmall.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+  };
+
   document.addEventListener('mousemove', (e) => {
-    cursorBig.style.transform   = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-    cursorSmall.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    updateCursor();
   });
 
-  document.querySelectorAll('a, button, .work__card, .about__card').forEach(el => {
-    el.addEventListener('mouseenter', () => cursorBig.style.transform += ' scale(1.6)');
-    el.addEventListener('mouseleave', () => {});
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, .work__card, .about__card, .contact__card, input, textarea, .work__filter')) {
+      isHovered = true;
+      updateCursor();
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('a, button, .work__card, .about__card, .contact__card, input, textarea, .work__filter')) {
+      isHovered = false;
+      updateCursor();
+    }
   });
 }
 
