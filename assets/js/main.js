@@ -155,7 +155,7 @@ if (cursorBig && cursorSmall && window.matchMedia('(pointer: fine)').matches) {
   let isHovered = false;
 
   const updateCursor = () => {
-    const scale = isHovered ? ' scale(1.5)' : ' scale(1)';
+    const scale = isHovered ? ' scale(1.3)' : ' scale(1)';
     cursorBig.style.transform   = `translate(${mouseX - 20}px, ${mouseY - 20}px)${scale}`;
     cursorSmall.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
   };
